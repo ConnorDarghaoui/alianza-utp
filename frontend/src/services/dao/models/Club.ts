@@ -13,3 +13,9 @@ export interface ClubUpdateDTO {
     group_status_id?: number
     group_category_id?: number
 }
+
+export interface ClubSocialLinksDTO {
+    facebook?: string
+    instagram?: string
+    twitter?: string
+}

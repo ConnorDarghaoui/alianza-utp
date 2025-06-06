@@ -1,5 +1,5 @@
 import http from "@/services/http"
-import type { ClubDTO, ClubUpdateDTO } from "@/services/dao/models/Club.ts"
+import type { ClubDTO, ClubUpdateDTO, ClubSocialLinksDTO } from "@/services/dao/models/Club.ts"
 
 class ClubDao {
     async fetchAll(): Promise<ClubDTO[]> {
@@ -14,6 +14,24 @@ class ClubDao {
 
     async update(clubId: number, payload: ClubUpdateDTO): Promise<void> {
         await http.put(`/clubs/${clubId}`, payload)
+    }
+
+    async fetchHistory(clubId: number): Promise<any[]> {
+        const { data } = await http.get<any[]>(`/clubs/${clubId}/history`)
+        return data
+    }
+
+    async fetchAccessLog(clubId: number): Promise<any[]> {
+        const { data } = await http.get<any[]>(`/clubs/${clubId}/access-log`)
+        return data
+    }
+
+    async updateDetails(clubId: number, payload: ClubUpdateDTO): Promise<void> {
+        await http.put(`/clubs/${clubId}/details`, payload)
+    }
+
+    async updateSocialLinks(clubId: number, payload: ClubSocialLinksDTO): Promise<void> {
+        await http.put(`/clubs/${clubId}/social-links`, payload)
     }
 }
 
